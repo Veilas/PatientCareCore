@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=MailServer()
+comment1.params=
+comment1.target=javax.mail.PasswordAuthentication\ getPasswordAuthentication()
+comment2.params=bedNumber\ requestTime
+comment2.target=void\ sendRequestMail(java.lang.String,\ java.lang.String)
+comment3.params=bedNumber\ serviceTime
+comment3.target=void\ sendConformationMail(java.lang.String,\ java.lang.String)
+numComments=4

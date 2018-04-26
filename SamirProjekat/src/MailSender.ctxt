@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=bI\ rT\ sT
+comment0.target=MailSender(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment1.params=
+comment1.target=void\ run()
+numComments=2
