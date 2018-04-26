@@ -1,0 +1,24 @@
+#!/usr/bin/python
+
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BOARD)
+INPUT_PINS = [8,10]
+OUTPUT_PINS = [3,5]
+
+for i in INPUT_PINS:
+	GPIO.setup(i,GPIO.OUT)
+for i in OUTPUT_PINS:
+	GPIO.setup(i,GPIO.IN)
+	GPIO.output(i,GPIO.HIGH)
+
+
+while(True):
+
+	for i in range(len(OUTPUT_PINS):
+		GPIO.output(OUTPUT_PINS[i],GPIO.LOW)
+		for j in INPUT_PINS:
+			if GPIO.INPUT(j) == 1:
+				print 
+		GPIO.output(i,GPIO.HIGH)
