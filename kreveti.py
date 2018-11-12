@@ -2,9 +2,31 @@
 #import RPi.GPIO as GPIO
 
 import time
-import sqlite3
-from threading import Thread
+#import sqlite3
+#from threading import Thread
 from pad4pi import rpi_gpio
+
+import socket
+
+
+
+
+CLIENT_ADRESSES = []
+
+def sendNumber(number):
+    client = socket.socket()
+    client.connect((CLIENT_ADRESSES[0],8000))
+    ba = bytearray()
+    ba.append(number)
+    client.send(ba)
+    print client.recv(256)
+    client.close()
+
+HOST = ''
+PORT = 5000
+
+
+
 
 #Mode mora da bude BCM
 INPUT_PINS_BCM = [9, 12, 16, 20, 21]
@@ -41,10 +63,21 @@ def keypresshandler(key):
 		thread.start()
 	ACTIVE_PINS = []
 
-keypad.registerKeyPressHandler(keypresshandler)
+keypad.registerKeyPressHandler(sendNumber)
 
 def Mainloop():
 	while(True):
-		infi = 1			
+		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		try:
+		    s.bind((HOST,PORT))
+		except socket.error as msg:
+		    print "Error: ", msg
+
+		s.listen(10)
+		while True:
+		    conn, addr = s.accept()
+		    if addr[0] not in CLIENT_ADRESSES:
+		        CLIENT_ADRESSES.append(addr[0])
+		s.close()
 
 Mainloop()
