@@ -14,13 +14,24 @@ import socket
 CLIENT_ADRESSES = []
 
 def sendNumber(number):
-    client = socket.socket()
-    client.connect((CLIENT_ADRESSES[0],8000))
-    ba = bytearray()
-    ba.append(number)
-    client.send(ba)
-    print client.recv(256)
-    client.close()
+    #No connected device
+    if len(CLIENT_ADRESSES) == 0:
+        return
+    i = 0
+    while i < len(CLIENT_ADRESSES):
+        client = socket.socket()
+        client.settimeout(3)
+        try:
+            client.connect((CLIENT_ADRESSES[i],8000))
+        except socket.error as timeoutmsg:
+            CLIENT_ADRESSES.remove(CLIENT_ADRESSES[i])
+            continue
+        ba = bytearray()
+        ba.append(number)
+        client.send(ba)
+        print client.recv(256)
+        client.close()
+        i += 1
 
 HOST = ''
 PORT = 5000
