@@ -5,7 +5,7 @@ case "$1" in
  start)
    echo "Starting example"
    # run application you want to start
-   python /home/pi/PatientCareCore/kreveti.py &
+   python /usr/local/sbin/kreveti.py &
    ;;
  stop)
    echo "Stopping example"
